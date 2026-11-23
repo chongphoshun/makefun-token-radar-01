@@ -1,4 +1,4 @@
-// Token Radar, radar-3: the entrypoint (Node 22, standard library only).
+// Token Radar, radar-5: the entrypoint (Node 22, standard library only).
 //
 // The program reads the sealed snapshot from /input/snapshot.json (or --input <file|dir>), scores
 // every pre-token protocol with the comparables model in lib/model.ts, writes the ranked board to
@@ -84,6 +84,7 @@ for (const name of shots) {
 writeFileSync(join(out, 'dossier.json'), buildDossier(out, { text_max_bytes: TEXT_MAX_BYTES, screenshots: SCREENSHOT_CAPS, dashboard: { max_files: 400, max_bytes: 4_194_304 } }));
 
 process.stdout.write(
-  `token radar: ${snapshot.protocols.length} protocols, ${snapshot.watchlist.length} on the watchlist, ${board.length} rows scored (${radar.early_size} early, ${radar.live_size} live set aside)\n` +
+  `token radar: ${snapshot.protocols.length} protocols, ${snapshot.watchlist.length} on the watchlist, ${board.length} rows scored (${radar.early_size} early, ${radar.accounting.excluded.reduce((s, e) => s + e.count, 0)} excluded with a reason)\n` +
+    `token radar: total implied ${radar.summary.total_implied_usd}, total expected ${radar.summary.total_expected_usd}, verdicts Farm ${radar.summary.verdict_counts.Farm} / Thin ${radar.summary.verdict_counts.Thin} / Skip ${radar.summary.verdict_counts.Skip}\n` +
     `token radar: wrote ${join(out, 'board.json')}, ${join(out, 'data.js')}, ${join(out, 'dashboard')} (3 files), ${join(out, 'screenshots')} (${shots.length} images) and ${join(out, 'dossier.json')}\n`,
 );

@@ -1,4 +1,4 @@
-/* Token Radar, radar-3 theme. Dark board, amber value, green growth.
+/* Token Radar, radar-5 theme. Dark board, amber value, green growth.
    Five palette values, two radii, two families: everything else is spacing,
    a hairline and a type step. */
 :root {
@@ -131,6 +131,13 @@ td.num { text-align: right; white-space: nowrap; }
 .status { display: inline-block; font-size: 12px; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border-strong); color: var(--muted); white-space: nowrap; }
 .status.pre { color: var(--accent); border-color: #4a3a12; }
 .status.live { color: var(--positive); border-color: #14532d; }
+.verdict { display: inline-block; font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 20px; border: 1px solid var(--border-strong); white-space: nowrap; }
+.verdict.farm { color: var(--positive); border-color: #14532d; }
+.verdict.thin { color: var(--accent); border-color: #4a3a12; }
+.verdict.skip { color: var(--muted); }
+.strip { margin-bottom: var(--step-4); padding: var(--step-4) var(--step-5); }
+.strip h2 { margin-bottom: var(--step-2); }
+.strip .sub { display: block; margin-bottom: var(--step-3); }
 .badge { display: inline-block; font-size: 11px; font-family: var(--font-num); padding: 1px 6px; border-radius: 4px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }
 .badge.peer { color: var(--info); border-color: #1d3a52; }
 .badge.market { color: var(--muted); }
