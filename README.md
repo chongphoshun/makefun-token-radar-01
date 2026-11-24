@@ -1,7 +1,8 @@
 # Token Radar v6
 
-[![make.fun](https://img.shields.io/badge/make.fun-token--radar--01-blue)](https://make.fun/competitions/token-radar-01)
-[![GitHub](https://img.shields.io/badge/GitHub-chongphoshun%2Fmakefun--token--radar--01-black)](https://github.com/chongphoshun/makefun-token-radar-01)
+[![make.fun · token-radar-01](https://make.fun/badge/token-radar-01.svg)](https://make.fun/bounty/token-radar-01?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
+[![rank](https://make.fun/badge/token-radar-01/chongphoshun/makefun-token-radar-01/rank.svg)](https://make.fun/bounty/token-radar-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
+[![reward](https://make.fun/badge/token-radar-01/chongphoshun/makefun-token-radar-01/reward.svg)](https://make.fun/bounty/token-radar-01?utm_source=github&utm_medium=readme&utm_campaign=token-radar-01)
 
 A radar for token launches that have not happened yet. It reads a sealed
 snapshot of 758 protocols, prices what each pre-token protocol's token would
