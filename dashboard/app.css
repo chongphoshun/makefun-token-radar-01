@@ -136,6 +136,11 @@ td.num { text-align: right; white-space: nowrap; }
 .verdict.thin { color: var(--accent); border-color: #4a3a12; }
 .verdict.skip { color: var(--muted); }
 .strip { margin-bottom: var(--step-4); padding: var(--step-4) var(--step-5); }
+.kpi { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--step-2); margin-bottom: var(--step-4); }
+.kpi .fact b { font-size: 17px; }
+.ok { color: var(--positive); font-weight: 700; white-space: nowrap; }
+.bad { color: var(--negative); font-weight: 700; white-space: nowrap; }
+.model h3 { margin-top: var(--step-4); font-size: 15px; }
 .strip h2 { margin-bottom: var(--step-2); }
 .strip .sub { display: block; margin-bottom: var(--step-3); }
 .badge { display: inline-block; font-size: 11px; font-family: var(--font-num); padding: 1px 6px; border-radius: 4px; background: var(--surface-2); color: var(--muted); border: 1px solid var(--border); }

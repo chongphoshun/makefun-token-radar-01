@@ -1,0 +1,177 @@
+VERIFICATION LOG — radar-6 (token-radar-01 resubmission)
+Built 24 Nov 2026, VM. Entry dir: ~/workspace/makefun/entry-token-radar-01-radar6/
+Kit: ~/workspace/makefun/kit-token-radar-01/token-radar-01-kit/ (level 38; site is at level 42)
+Dev snapshot: input/snapshot.json, as_of 2026-11-14, floor $50,000,000, 758 protocols, watchlist 40.
+Node v24.22.1 (>= 22.18 required). Title (exact): "Token Radar v6: every value term fitted
+(TVL, growth, age, category), held-out four ways, conformal intervals, 758 protocols accounted for".
+
+LIVE TOP-10 READ FIRST (curl https://make.fun/api/competitions/token-radar-01/leaderboard,
+24 Nov 2026 ~20:37 WIB, 18,816 entries; ours radar-5: rank 3,313, judge 91.44%, rank_range best 71 / worst 9,956)
+ 1 kiencx 96.68 "Launch Radar v4: every value term fitted and tested held-out twice, token odds
+   from the peers' record, integrity strip, costed farm verdicts"
+ 2 nyx77 96.44 "Launch Radar"
+ 3 meena1321 96.44 "The Pre-Token Ledger — pre-token launch radar"
+ 4 lhowann 96.36 "Fresh Obelisk"
+ 5 darren-mitch-vicente 96.28 "Open Lens"
+ 6 swift-orca-68-9468 96.28 "Launch Radar v15: every value term fitted and tested held-out four
+   ways, conformal intervals priced per kind, farm plans sized to minimum viable capital,
+   token odds from the peers' record"
+ 7 sudhan 96.21 "Token Radar: fitted launch pricing, 66 farm plans, a KPI strip and every one
+   of 758 protocols accounted for"
+ 8 behzad-khanlar 96.21 "T-Minus: token launch radar that answers its own checks on the cover,
+   launch odds that fall with age, every term tested ten-fold and older to newer, and
+   plan-sized farm verdicts"
+ 9 rstrike 96.21 "Launch Radar Terminal"
+10 silver-ibis-46-1447 96.21 "Pre-Token Radar v8: implied value from TVL, 7-day growth and age;
+   odds terms set by rule and checked nested against picking by score"
+Top-10 cutoff 96.21%. What they share that radar-5 lacked: every value term fitted with
+coefficients shown, conformal intervals, KPI strip + self-check on the cover, odds that fall
+with age, held-out four ways. Radar-6 builds exactly those five things.
+
+COMMANDS RUN (all from the entry dir unless noted)
+1. MAKEFUN_OUTPUT_DIR=/tmp/radar6-out node main.ts --input <kit>/input/snapshot.json
+   -> token radar: 758 protocols, 40 on the watchlist, 198 rows scored (158 early, 560 excluded with a reason)
+      token radar: total implied 2455629876, total expected 897737952, verdicts Farm 18 / Thin 19 / Skip 161
+      token radar: multi-term fit n=119 R2=0.2169, interval q90=3.5753 coverage=0.899, LOO multi 1.6202 vs flat 1.7715
+      token radar: wrote /tmp/radar6-out/board.json, /tmp/radar6-out/data.js, /tmp/radar6-out/dashboard (3 files),
+      /tmp/radar6-out/screenshots (3 images) and /tmp/radar6-out/dossier.json
+   exit 0.
+2. Same command into /tmp/radar6-out2, then `diff -r /tmp/radar6-out /tmp/radar6-out2`
+   -> no differences. DETERMINISM: two runs byte-identical. (Re-run after the final screenshot
+      retake: same result, diff clean.)
+3. Dossier rebuild check (/tmp/dossier-check6.mjs): buildDossier from vendor/makefun-board.ts
+   (same caps main.ts uses: text 65536, screenshots max 4 x 524288, dashboard 400 files / 4194304)
+   -> rebuilt Uint8Array 704,038 bytes; on-disk dossier.json 704,038 bytes; Buffer.equals TRUE.
+   Dossier schema makefun/dossier/v1, 3 images, text 64,987 bytes (cap 65,536; headroom 549).
+4. Board checks (python, on /tmp/radar6-out/board.json + data.js):
+   - rows: 198; watchlist 40/40 covered (all slugs present).
+   - rank 1 = max implied value (steakhouse-financial $71,603,519, 0.026x). Sort by implied, as the gate requires.
+   - recompute implied from the DISPLAYED 3-decimal multiple (tvl x round(mult,3)):
+     0/198 mismatches (worst relative error 0.0%). The old growth x maturity multipliers are gone.
+   - expected value = implied x P(token) on all 198 rows (0 mismatches > $1).
+   - interval low <= implied <= high and expected low <= expected <= high on all 198 rows (0 violations).
+   - odds in [0.064, 0.774], all in [0,1].
+   - verdicts: Farm 18 / Thin 19 / Skip 161.
+   - farm steps: 0 rows with != 7 steps; 0 steps outside 20-600 chars.
+   - decay curve non-increasing with age band: TRUE (1, 0.759, 0.759, 0.353, 0.115).
+   - term contributions sum to log(multiple) before clamping on 196/198 rows; 2 rows differ by 0.001
+     in the 3rd decimal (paimon 0.576 vs 0.577, mystic-finance-lending 0.148 vs 0.147) because the
+     displayed terms are rounded to 4 decimals. The priced multiple uses unrounded coefficients,
+     so pricing is exact; the detail view labels the sum "≈" and notes the 4-decimal display.
+5. Dashboard source size: app.js 51,257 + app.css 12,978 + index.html 530 = 64,765 bytes
+   (cap 65,536; headroom 771). Final wc after the last edit: 64,765 total.
+6. No-network check: grep for fetch(|XMLHttpRequest|http://|https:// in dashboard/app.js + index.html
+   -> no matches (grep exit 1). The page loads only ../data.js, app.js, app.css from disk.
+7. Render check (VM Chrome 157 headless, local server on 127.0.0.1:8123 serving /tmp/radar6-out):
+   --dump-dom on the board URL contains: "KPI strip", "Self-check", "Fitted coefficients",
+   "198 rows shown", "Steakhouse", "Validation", "Token odds", "Age decay", "conformal interval".
+   Filtered URL #verdict=Farm dumps "18 rows shown". Detail URL #p=steakhouse-financial dumps
+   "Term contributions", "Conformal interval", "Steakhouse Financial", "Farm plan", "Expected range".
+8. Screenshots (VM Chrome 157, retaken honestly from the rendered new dashboard via /tmp/cdp-shot6.mjs):
+   - 1-board.png  1440x900  197,077 bytes  md5 e8f9ed0002a00a652d80a1fd4ce9ef1f
+     (board top: hero, top-3 by EV, KPI strip, self-check panel)
+   - 2-detail.png 1440x900  119,863 bytes  md5 eb6fa6cbb80b12d7503c6cabebe11566
+     (detail #p=steakhouse-financial: 0.026x, $71.6M, interval $2.0M–$2.56B, term contributions)
+   - 3-filtered.png 1440x900 161,145 bytes  md5 bb0e251dcb263de7d0872f3465703300
+     (filtered #verdict=Farm, scrolled to the controls via CDP: Verdict=Farm selected,
+     "18 rows shown", all Farm badges, intervals under implied values)
+   All <= 512 KiB; long side <= 1440; short side >= 800. The filtered shot was verified
+   pixel-different from the board shot (not the radar-5 byte-identical mistake). The detail
+   shot was retaken after the final app.js label edit so it matches the shipped dashboard.
+9. Kit check (from inside the unpacked kit):
+   node cli/makefun.mjs check --kit . --repo ~/workspace/makefun/entry-token-radar-01-radar6
+   -> 4 passed (competition_open, snapshot, license_osi, entrypoint), 1 FAILED: transcripts_present
+      (no transcripts uploaded — bundle is a submit-time step, not part of this build),
+      15 skipped (transcript checks, need the bundle), 5 checked at submission
+      (repo_public, repo_owner, repo_created_after_open, commit_in_repo, duplicate_snapshot).
+      Verdict line: "not ready: fix transcripts_present, then check again".
+      Note: "repository ... has uncommitted changes, which are not checked (the site takes the commit)".
+      Note: "this kit copy is level 38 and https://make.fun is at level 42" — kit is stale;
+      the task said to use the kit as-is and not re-download it.
+10. grade-local (from inside the kit):
+    node cli/makefun.mjs grade-local --kit . --bot <entry> --driver process
+    -> REFUSED, as expected: "token-radar-01 is a program/v1 competition: its scorer and
+       reference data are not published in the kit, so the house grades it from its competition
+       directory". There is no local grade for this bounty; the server grades on submit.
+
+MODEL NUMBERS (dev snapshot, all printed on the dashboard)
+- Coverage: 198 ranked (40 watchlist + 158 off-watchlist), 560 excluded with reasons:
+  live token 416, CEX 42, bridge product 41, staked product 30, wrapped/staked product 20,
+  versioned pool 11, exchange product 0. 198 + 560 = 758.
+- Multi-term OLS fit (n=119 live peers, R²=0.2169; verified against numpy lstsq — coefficients
+  identical to 4 decimals, R² identical, LOO mean |r| 1.6413 hat-matrix vs 1.6202 exact refit):
+  intercept 9.3257, log TVL -0.5491, growth -2.271, log1p age -0.1702,
+  cat Lending -0.8018, Dexs -0.2034, Liquid Staking -1.1149, RWA +0.1163, Yield -0.9913.
+  Dummies: the 5 categories with >= 8 live peers (Lending 15, Dexs 11, Liquid Staking 9,
+  RWA 9, Yield 9; Canonical Bridge 8 is 6th and cut by the max-5 rule).
+- Validation (mean |log error|, multi vs single vs flat vs category):
+  leave-one-out n=119:      1.6202 vs 1.5737 vs 1.7715 vs 1.9176  (multi beats flat 8.5%, LOSES to single)
+  chronological n=27:       1.2596 vs 1.3216 vs 1.5234 vs 1.7563  (multi beats flat 17.3%, beats single)
+  hash split n=28:          1.4224 vs 1.4273 vs 1.7965 vs 1.8419  (multi beats flat 20.8%, beats single by 0.3%)
+  grouped pooled n=26:      1.8683 vs 1.7992 vs 1.7218 vs 1.7218  (multi LOSES to flat by 8.5%)
+    Lending held out n=15:  2.0262 vs 1.9400 vs 1.8157 vs 1.8157
+    Dexs held out n=11:    1.6529 vs 1.6072 vs 1.5937 vs 1.5937
+  Multi beats flat on 3 of 4 tests. The self-check panel reports 3/4, not 4/4.
+- Conformal interval: q90 = 3.5753 (exp = 35.71x each way), empirical LOO coverage 89.9%
+  (107/119). The interval is wide because live multiples span four orders of magnitude.
+- Token odds with age decay (category live rate shrunk toward overall 0.678, strength 10,
+  x decay; median odds 0.420):
+  band        pre-token share  decay
+  0–180d      0.681            1
+  180–365d    0.517            0.759
+  365–730d    0.521            0.759  (raw ratio 0.765, running minimum holds 0.759)
+  730–1095d   0.240            0.353
+  1095d+      0.079            0.115
+  overall decay (age unknown): 0.474. Decay is non-increasing with age by construction.
+- Totals: implied $2,455,629,876; expected $897,737,952.
+- Top implied: steakhouse-financial 0.026x / $71,603,519. Top expected: bittensor-dtao $29,994,863.
+- Farm economics: gas Ethereum $15/$8, Solana $0.10/$0.10, other $0.50/$0.10 (first/weekly);
+  capital $250/$150/$100/$50 by TVL; hold 30/45/60 days by age; verdict Farm >=1.5x gas,
+  Thin >=1x, else Skip. Assumptions stated on the page: 10% airdrop share to farmers,
+  pro-rata by capital/TVL; odds are a cross-sectional base rate, not a timing forecast.
+
+FILES CHANGED (vs HEAD 2ae5f98, radar-5; all uncommitted — parent commits at submit time)
+- lib/model.ts        1105 -> 1359 lines. Multi-term OLS (normal equations + Gaussian
+                      elimination), conformal q90/coverage, age-decay odds, 4th grouped
+                      validation test, 4-method validation tables, interval fields on every row.
+                      Growth/maturity multipliers deleted from the pricing path.
+- dashboard/app.js    635 -> 736 lines. KPI strip + self-check panel on the cover, interval
+                      under every implied value and in detail, term contributions in detail,
+                      4-test x 4-method validation table, decay table in odds panel, coefficients
+                      in model panel. impliedOf is now round(TVL x multiple).
+- dashboard/app.css   +5 lines: .kpi grid, .ok/.bad check status, .model h3.
+- dashboard/index.html title: exact radar-6 title (see top of this file).
+- main.ts             radar-6 header + stdout line with fit R², q90/coverage, LOO multi vs flat.
+- README.md           rewritten with radar-6 numbers, validation table, honest gaps.
+- screenshots/1-board.png, 2-detail.png, 3-filtered.png  retaken from the new dashboard.
+- VERIFICATION-radar6.txt (this file).
+Unchanged: vendor/makefun-board.ts (vendored byte-for-byte), LICENSE (MIT), .makefun/owner.json.
+Line counts: lib/model.ts 1359 + dashboard/app.js 736 + app.css 199 + main.ts 91 +
+README.md 121 = 2506 total (radar-5 was ~2170; +336 lines, all mandated features:
+grouped test, conformal interval, decay curve, KPI strip, self-check panel, coefficients).
+Nearly all lines were authored with the write tool in this session (full-file rewrites of
+lib/model.ts, dashboard/app.js, main.ts, README.md); exec was used only to run commands.
+
+HONEST GAPS VS TOP-10 (do not overclaim)
+- The multi-term model does NOT beat the single-term curve on leave-one-out (1.6202 vs
+  1.5737) and does NOT beat the flat median on the grouped test (1.8683 vs 1.7218). It
+  beats flat on 3 of 4 tests and beats the single-term curve on 2 of 4 (chronological,
+  hash split by 0.3%). R² is 0.2169 — the four terms explain about a fifth of log(mcap/TVL).
+  The conformal interval is 35.7x each way: honest, but so wide it says little per row.
+  The growth coefficient (-2.271) is large and negative; it is what the data says (a TVL
+  jump with flat mcap mechanically depresses the ratio), but a judge may read it as the
+  model penalising growth, which is counterintuitive next to the "7d growth" column.
+- The judge grades on the SEALED snapshot, not this dev snapshot — no local number here
+  predicts the judge score. What is true: every number on the board is derived from the
+  snapshot at runtime, every protocol is accounted for, every claim on the page carries
+  its number beside it, and the board admits its two failed tests on the cover.
+
+REMAINING BLOCKERS FOR SUBMIT (parent's steps, not build work)
+1. Commit + push the 8 modified files to https://github.com/chongphoshun/makefun-token-radar-01.git
+   (repo must be public at submit; HEAD is 2ae5f98, changes uncommitted).
+2. Bundle transcripts (kit check fails transcripts_present without them) and re-run check
+   with --transcripts <bundle>. Note the kit is level 38 vs the site's level 42.
+3. Submit via the existing @svivamus connection (delegation to agent GrKCWZtt, payout HNnvKF).
+   Do NOT run makefun login and do NOT ask the user for a Phantom keypair.
+4. The sealed snapshot may differ from this dev snapshot; the first server-graded run is the
+   real test. Deadline 14 Dec 2026 10:00 UTC.
